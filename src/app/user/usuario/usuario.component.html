@@ -1,0 +1,181 @@
+<app-menu></app-menu>
+<main class="page-content">
+<div class="container-fluid">
+    <h4>Gestionar usuarios:</h4>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <button type="button" class="btn btn-secondary btn-lg" (click)="modal_nuevo(content)">Añadir nuevo usuario</button>
+        </ol>
+    </nav>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">CI</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Dirrecion</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Celular</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let user of users">
+            <tr>
+                <th scope="row">{{user.ci}}</th>
+                <td>{{user.nombre}}</td>
+                <td>{{user.apellido}}</td>
+                <td>{{user.dirrecion}}</td>
+                <td>{{user.telefono}}</td>
+                <td>{{user.celular}}</td>
+                <td>
+                    <div class="row">
+                        <button type="button" class="btn btn-secondary mr-2" (click)="modal_editar(editar,id_user)">
+                            Modificar
+                        </button>
+                        <br>
+                        <button type="button" class="btn btn-warning mr-2" (click)="modal_eliminar(eliminar)">
+                            Eliminar
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal new usuario-->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Registro de nuevo usuario</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">CI</label>
+                    <input [(ngModel)]="user.ci" type="text" class="form-control" id="inputAddress">
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Nombres</label>
+                <input [(ngModel)]="user.nombre" type="text" class="form-control" id="inputAddress1">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Apellido</label>
+                <input [(ngModel)]="user.apellido" type="text" class="form-control" id="inputAddress2">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress">Dirrecion</label>
+              <input [(ngModel)]="user.dirrecion" type="text" class="form-control" id="inputAddress" placeholder="Descripcion completa">
+            </div>
+            <div class="form-group">
+                <label for="example-date-input">Fecha nacimiento</label>
+                  <input [(ngModel)]="user.fecha_nac" class="form-control" type="date"  id="example-date-input">
+              </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label [(ngModel)]="user.telefono" for="inputEmail4">Telefono</label>
+                    <input type="text" class="form-control" id="inputAddress3">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Celular</label>
+                    <input [(ngModel)]="user.celular" type="text" class="form-control" id="inputAddress4">
+                </div>
+            </div>
+
+    </div>
+    <div class="modal-body">
+        <small id="emailHelp" class="form-text text-muted">Debe asignar un cargo al nuevo ususario</small>
+        <label for="inputState">Asignar un cargo</label>
+        <select id="inputState" class="form-control">
+            <option selected>vendedor</option>
+            <option>administrador</option>
+        </select>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="guardar_modal_nuevo()">Guardar</button>
+    </div>
+</ng-template>
+
+<!-- Modal new usuario-->
+<ng-template #editar let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Registro de usuario</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="inputEmail4">CI</label>
+                  <input [(ngModel)]="user.ci" type="number" class="form-control" id="inputAddress">
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Nombres</label>
+              <input type="text" class="form-control" id="inputAddress2">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Apellido</label>
+              <input type="text" class="form-control" id="inputAddress2">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Dirrecion</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="Descripcion completa">
+          </div>
+          <div class="form-group">
+              <label for="example-date-input">Fecha nacimiento</label>
+                <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+            </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="inputEmail4">Telefono</label>
+                  <input type="text" class="form-control" id="inputAddress2">
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="inputPassword4">Celular</label>
+                  <input type="text" class="form-control" id="inputAddress2">
+              </div>
+          </div>
+
+  </div>
+  <div class="modal-body">
+      <small id="emailHelp" class="form-text text-muted">Debe asignar un cargo al nuevo ususario</small>
+      <label for="inputState">Asignar un cargo</label>
+      <select id="inputState" class="form-control">
+          <option selected>vendedor</option>
+          <option>administrador</option>
+      </select>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="guardar_modal_editar()">Guardar</button>
+  </div>
+</ng-template>
+
+<!-- Modal new usuario-->
+<ng-template #eliminar let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Eliminar usuario</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <label for="">¿Esta seguro de eliminar?</label>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="guardar_modal_eliminar()">Eliminar</button>
+  </div>
+  
+</ng-template>
+</main>
